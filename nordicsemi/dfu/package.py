@@ -460,7 +460,7 @@ DFU Package: <{0}>:
                             sd_size=sd_size,
                             app_size=app_size,
                             bl_size=bl_size,
-                            sd_req=firmware_data[FirmwareKeys.INIT_PACKET_DATA][PacketField.REQUIRED_SOFTDEVICES_ARRAY]
+                            sd_req=firmware_data[FirmwareKeys.INIT_PACKET_DATA][PacketField.REQUIRED_SOFTDEVICES_ARRAY],
                             nonce = nonce)
 
             if (self.signer is not None):
