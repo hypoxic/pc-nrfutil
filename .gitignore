@@ -1,5 +1,6 @@
 *.pyc
 *.py.bak
+*.bak
 
 # Virtualenv
 venv/

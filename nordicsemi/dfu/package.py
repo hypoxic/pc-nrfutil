@@ -306,6 +306,7 @@ class Package:
       |- boot_validation_signature (little-endian): {17}
       |
       |- is_debug: {18}
+      |- nonce (little-endian): {19}
 
 """.format(index,
         type_strs[hex_type],
@@ -326,6 +327,7 @@ class Package:
         boot_validation_type,
         boot_validation_bytes,
         cmd.init.is_debug,
+        binascii.hexlify(cmd.init.nonce)
         )
 
         return s
@@ -443,6 +445,7 @@ DFU Package: <{0}>:
                 else:
                     boot_validation_bytes_array.append(b'')
 
+            nonce = os.urandom(12)
 
             init_packet = InitPacketPB(
                             from_bytes = None,
@@ -457,7 +460,8 @@ DFU Package: <{0}>:
                             sd_size=sd_size,
                             app_size=app_size,
                             bl_size=bl_size,
-                            sd_req=firmware_data[FirmwareKeys.INIT_PACKET_DATA][PacketField.REQUIRED_SOFTDEVICES_ARRAY])
+                            sd_req=firmware_data[FirmwareKeys.INIT_PACKET_DATA][PacketField.REQUIRED_SOFTDEVICES_ARRAY]
+                            nonce = nonce)
 
             if (self.signer is not None):
                 signature = self.signer.sign(init_packet.get_init_command_bytes())

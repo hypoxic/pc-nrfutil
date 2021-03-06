@@ -1,3 +1,4 @@
+syntax = "proto2";
 package dfu;
 
 // Version 0.1
@@ -57,6 +58,7 @@ message InitCommand {
 	optional bool			is_debug		= 9 [default = false];
 
 	repeated BootValidation	boot_validation	= 10;
+	optional bytes  nonce		= 11;	
 }
 
 message ResetCommand {
